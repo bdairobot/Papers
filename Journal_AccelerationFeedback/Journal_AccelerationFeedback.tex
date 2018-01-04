@@ -174,7 +174,7 @@
 
 % *** SPECIALIZED LIST PACKAGES ***
 %
-\usepackage{algorithmic}
+% \usepackage{algorithmic}
 % algorithmic.sty was written by Peter Williams and Rogerio Brito.
 % This package provides an algorithmic environment fo describing algorithms.
 % You can use the algorithmic environment in-text or within a figure
@@ -214,11 +214,11 @@
 
 
 % *** SUBFIGURE PACKAGES ***
-%\ifCLASSOPTIONcompsoc
-%  \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
-%\else
-%  \usepackage[caption=false,font=footnotesize]{subfig}
-%\fi
+\ifCLASSOPTIONcompsoc
+ \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+\else
+ \usepackage[caption=false,font=footnotesize]{subfig}
+\fi
 % subfig.sty, written by Steven Douglas Cochran, is the modern replacement
 % for subfigure.sty, the latter of which is no longer maintained and is
 % incompatible with some LaTeX packages including fixltx2e. However,
@@ -370,21 +370,22 @@
 % was not built to handle multiple paragraphs
 %
 
-\author{Bo~Dai$^{1,2}$,
-        Yuqing~He$^{2}$,~\IEEEmembership{Member,~IEEE,}
-        Guangyu~Zhang$^{1,2}$,
-        Feng~Gu$^{2}$,
-        Liying~Yang$^{2}$,\\
-        and~Weiliang~Xu$^{3}$,~\IEEEmembership{Senior Member,~IEEE}% <-this % stops a space
-\thanks{*This work is supported by the National Natural Foundation of China (Grant No. 61433016 and 61503369) and the State Key Laboratory of Robotics, Shenyang Institute of Automation, China.}% <-this % stops a space
-\thanks{$^{1}$University of Chinese Academy of Sciences, Beijing 100049, China.
-    {\tt\small \{daibo,zhangguangyu\}@sia.cn}}%
-\thanks{$^{2}$The State Key Laboratory of Robotics, Shenyang Institute of Automation, Chinese Academy of Sciences, Shenyang 110016, China.
-    {\tt\small \{heyuqing,fenggu,yangliying,jdhan\}@sia.cn}}%
-\thanks{$^{3}$Weilinag Xu is with Department of Mechanical Engineering, the University of Auckland, Auckland, New Zealand.
-    {\tt\small p.xu@auckland.ac.nz}}
+\author{Bo~Dai,
+        Yuqing~He,~\IEEEmembership{Member,~IEEE,}
+        Guangyu~Zhang,
+        Feng~Gu,
+        Liying~Yang,
+        Jianda~Han\\
+        and~Weiliang~Xu,~\IEEEmembership{Senior Member,~IEEE}% <-this % stops a space
 
-\thanks{Manuscript received April 19, 2005; revised August 26, 2015.}}
+\thanks{Manuscript received April 19, 2005; revised August 26, 2015.
+    \newline\newline}
+\thanks{Bo~Dai and Guangyu~Zhang are with the University of Chinese Academy of Sciences, Beijing, China and the State Key Laboratory of Robotics, Shenyang Institute of Automation, Chinese Academy of Sciences, Shenyang, China
+    (\text{e-mail}: {\tt\small daibo@sia.cn} and {\tt\small zhangguangyu@sia.cn}).}%
+\thanks{Yuqing He, Feng Gu and Liying Yang are with the State Key Laboratory of Robotics, Shenyang Institute of Automation, Chinese Academy of Sciences, Shenyang, China
+    (\text{e-mail}: {\tt\small heyuqing@sia.cn}, {\tt\small fenggu@sia.cn}, {\tt\small yangliying@sia.cn} and {\tt\small jdhan@sia.cn}).}%
+\thanks{Weilinag Xu is with Department of Mechanical Engineering, the University of Auckland, New Zealand
+    (e-mail: {\tt\small p.xu@auckland.ac.nz}).}}
 
 % note the % following the last \IEEEmembership and also \thanks - 
 % these prevent an unwanted space from occurring between the last author name
@@ -440,12 +441,19 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-The abstract goes here.
+Almost all mechatronic systems, such as manipulators, machine tools and unmaned systems, suffer from various disturbances mainly consist of modeling errors and external disturbances.
+These disturbances, however, can weaken control performance of the system in the forms of force and torque.
+To this end, an acceleration feedback method, proposed in our previous work, can transform mechatronic system from torque or force actuator to acceleration actuator, so that disturbaces can be suppressed.
+In this paper, we first give the theoretical analysis of acceleration feedback method.
+Then, based on this, an modified acceleration feedback controller with a pre-filter is designed and implemented on two kinds of unmanned aerial platforms to test and verify our method.
+One of them is an aerial manipulator system disturbed by the movement of manipulator, and another is an unmanned aerial vehicle disturbed by strong wind.
+Furthermore, the analysis of different disturbances are conducted, which provides the reference for acceleration feedback based controller design.
+Finally, the promising experimental results demonstrated the robustness and effectiveness of acceleration feedback method for disturbance rejection.
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
 \begin{IEEEkeywords}
-IEEE, IEEEtran, journal, \LaTeX, paper, template.
+Disturbance rejection, acceleration feedback, wind disturbance, aerial manipulator, unmanned aerial vehicle.
 \end{IEEEkeywords}
 
 
@@ -491,6 +499,7 @@ I wish you the best of success.
 \subsection{Subsection Heading Here}
 Subsection text here.
 
+
 % needed in second column of first page if using \IEEEpubid
 %\IEEEpubidadjcol
 
@@ -511,15 +520,15 @@ Subsubsection text here.
 % option should be used if it is desired that the figures are to be
 % displayed while in draft mode.
 %
-%\begin{figure}[!t]
-%\centering
-%\includegraphics[width=2.5in]{myfigure}
-% where an .eps filename suffix will be assumed under latex, 
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
-%\caption{Simulation results for the network.}
-%\label{fig_sim}
-%\end{figure}
+% \begin{figure}[!t]
+% \centering
+% \includegraphics[width=2.5in]{bdai}
+% % where an .eps filename suffix will be assumed under latex, 
+% % and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% % via \DeclareGraphicsExtensions.
+% \caption{Simulation results for the network.}
+% \label{fig_sim}
+% \end{figure}
 
 % Note that the IEEE typically puts floats only at the top, even when this
 % results in a large percentage of a column being occupied by floats.
@@ -533,16 +542,23 @@ Subsubsection text here.
 % Watch out that the combined width of all the subfigures on a 
 % line do not exceed the text width or a line break will occur.
 %
-%\begin{figure*}[!t]
-%\centering
-%\subfloat[Case I]{\includegraphics[width=2.5in]{box}%
-%\label{fig_first_case}}
-%\hfil
-%\subfloat[Case II]{\includegraphics[width=2.5in]{box}%
-%\label{fig_second_case}}
-%\caption{Simulation results for the network.}
-%\label{fig_sim}
-%\end{figure*}
+
+\begin{figure*}[]
+\centering
+\subfloat[Three-link direct-drive robot]{\includegraphics[width=1.7in]{ourResearches_1}%
+\label{fig:1_1}}
+\hfil
+\subfloat[Unmanned helicopter model]{\includegraphics[width=1.7in]{ourResearches_2}%
+\label{fig:1_2}}
+\hfil
+\subfloat[Robust aerial manipulator system]{\includegraphics[width=1.7in]{ourResearches_3}%
+\label{fig:1_3}}
+\hfil
+\subfloat[Wind disturbace rejection for UAV]{\includegraphics[width=1.7in]{ourResearches_4}%
+\label{fig:1_4}}
+\caption{Disturbance rejection with acceleration feedback method in our researches.}
+\label{fig:1}
+\end{figure*}
 %
 % Note that often IEEE papers with subfigures do not employ subfigure
 % captions (using the optional argument to \subfloat[]), but instead will
@@ -562,24 +578,24 @@ Subsubsection text here.
 % the IEEE normally uses this smaller font for tables.
 % The \label must come after \caption as always.
 %
-%\begin{table}[!t]
-%% increase table row spacing, adjust to taste
-%\renewcommand{\arraystretch}{1.3}
-% if using array.sty, it might be a good idea to tweak the value of
-% \extrarowheight as needed to properly center the text within the cells
-%\caption{An Example of a Table}
-%\label{table_example}
-%\centering
-%% Some packages, such as MDW tools, offer better commands for making tables
-%% than the plain LaTeX2e tabular which is used here.
-%\begin{tabular}{|c||c|}
-%\hline
-%One & Two\\
-%\hline
-%Three & Four\\
-%\hline
-%\end{tabular}
-%\end{table}
+% \begin{table}[!t]
+% % increase table row spacing, adjust to taste
+% \renewcommand{\arraystretch}{1.3}
+% % if using array.sty, it might be a good idea to tweak the value of
+% % \extrarowheight as needed to properly center the text within the cells
+% \caption{An Example of a Table}
+% \label{table_example}
+% \centering
+% % Some packages, such as MDW tools, offer better commands for making tables
+% % than the plain LaTeX2e tabular which is used here.
+% \begin{tabular}{|c||c|}
+% \hline
+% One & Two\\
+% \hline
+% Three & Four\\
+% \hline
+% \end{tabular}
+% \end{table}
 
 
 % Note that the IEEE does not put floats in the very first column
@@ -593,10 +609,23 @@ Subsubsection text here.
 % \fnbelowfloat command of the stfloats package.
 
 
+\section{Theory of AF for Disturbance Rejection}
+The text goes here.
 
+\section{System Model of UAVs and AF Enhanced Controller Design}
+The text goes here.
+
+\section{Experimental Implementation}
+The text goes here.
+
+\section{Disturbances Analysis}
+The text goes here.
+
+\section{Experimental Results}
+The text goes here.
 
 \section{Conclusion}
-The conclusion goes here.
+The text goes here.
 
 
 
@@ -629,10 +658,7 @@ Appendix two text goes here.
 
 % use section* for acknowledgment
 \section*{Acknowledgment}
-
-
-The authors would like to thank...
-
+This work is supported by the National Natural Foundation of China (Grant No. 61433016 and 61503369) and the State Key Laboratory of Robotics, Shenyang Institute of Automation, China Academy of Sciences.
 
 % Can use something like this to put references on a page
 % by themselves when using endfloat and the captionsoff option.
@@ -683,38 +709,38 @@ H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
 %\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
 % or if you just want to reserve a space for a photo:
 
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{bdai}}]{Bo Dai}
-is with 
-\end{IEEEbiography}
+% \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{bdai}}]{Bo Dai}
+% is with 
+% \end{IEEEbiography}
 
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{yqhe}}]{Yuqing He}
-  received the B.S. degree in engineering and automation from Northeastern University, Qinhuangdao, China in 2002, and the Ph.D. degree in pattern recognition and intelligent system from the Shenyang Institute of Automation, Chinese Academy of Sciences, Shenyang, China in 2008.
-  He is currently a Professor at the State Key Laboratory of Robotics, Shenyang Institute
-  of Automation, Chinese Academy of Sciences, Shenyang. 
-  In 2012, he was a Visiting Researcher at the Institute for Automatic Control Theory, Technical University of Dresden, Germany.
-  His main research interests include nonlinear estimation, control, and cooperation of multiple robots.
+% \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{yqhe}}]{Yuqing He}
+%   received the B.S. degree in engineering and automation from Northeastern University, Qinhuangdao, China in 2002, and the Ph.D. degree in pattern recognition and intelligent system from the Shenyang Institute of Automation, Chinese Academy of Sciences, Shenyang, China in 2008.
+%   He is currently a Professor at the State Key Laboratory of Robotics, Shenyang Institute
+%   of Automation, Chinese Academy of Sciences, Shenyang. 
+%   In 2012, he was a Visiting Researcher at the Institute for Automatic Control Theory, Technical University of Dresden, Germany.
+%   His main research interests include nonlinear estimation, control, and cooperation of multiple robots.
 
-  He is currently working
-\end{IEEEbiography}
+%   He is currently working
+% \end{IEEEbiography}
 
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{gyzhang}}]{Guangyu Zhang}
-  Biography text here.
-\end{IEEEbiography}
+% \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{gyzhang}}]{Guangyu Zhang}
+%   Biography text here.
+% \end{IEEEbiography}
 
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{fgu}}]{Feng Gu}
-  received the B.S. and M.S. degrees in system engineering from Nanjing University of Science and Technology, Nanjing, China in 2005 and 2007 respectively, and the Ph.D. degree in pattern recognition and intelligent systems from the Shenyang Institute of Automation, Chinese Academy of Sciences, Shenyang, China in 2011.
-  He is currently an Associate Professor at the State Key Laboratory of Robotics, Shenyang Institute of Automation, Chinese Academy of Sciences, Shenyang.
+% \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{fgu}}]{Feng Gu}
+%   received the B.S. and M.S. degrees in system engineering from Nanjing University of Science and Technology, Nanjing, China in 2005 and 2007 respectively, and the Ph.D. degree in pattern recognition and intelligent systems from the Shenyang Institute of Automation, Chinese Academy of Sciences, Shenyang, China in 2011.
+%   He is currently an Associate Professor at the State Key Laboratory of Robotics, Shenyang Institute of Automation, Chinese Academy of Sciences, Shenyang.
 
-  His current research interests include set-theory-based estimation and control, cooperation of multiple robots, and research work on mobile robots.
-\end{IEEEbiography}
+%   His current research interests include set-theory-based estimation and control, cooperation of multiple robots, and research work on mobile robots.
+% \end{IEEEbiography}
   
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{lyyang}}]{Liying Yang}
-  Biography text here.
-\end{IEEEbiography}
+% \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{lyyang}}]{Liying Yang}
+%   Biography text here.
+% \end{IEEEbiography}
   
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{wlxu}}]{Weiliang Xu}
-  Biography text here. 
-\end{IEEEbiography}
+% \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{wlxu}}]{Weiliang Xu}
+%   Biography text here. 
+% \end{IEEEbiography}
 
 % insert where needed to balance the two columns on the last page with
 % biographies
