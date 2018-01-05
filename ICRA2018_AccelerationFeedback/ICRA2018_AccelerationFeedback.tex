@@ -111,18 +111,21 @@ Finally, some concluding remarks are drawn in Section VI.
 
 The general dynamic model of a mechatronic system with multiple freedom, which includes UAV system, is established by Euler-Lagrange equation as
 \begin{equation}
-    M(q)\ddot{q}+C(q,\dot{q})\dot{q}+G(q)+F(q,\dot{q})=\tau+\Delta \label{e1} 
+    M(q)\ddot{q}+C(q,\dot{q})\dot{q}+G(q)+F(q,\dot{q})=\tau+\Delta 
+    \label{e1} 
 \end{equation}
 where $q\in\mathbb{R}^n$ is position vector, and $M(q)$ is mass as a scale.
 $C(q,\dot{q})\in\mathbb{R}^n$, $G(q)\in\mathbb{R}^n$ and $F(q,\dot{q})\in\mathbb{R}^n$ are Coriolis force, gravity and drag force respectively.
 However, this equation also holds when $q$ represents angular displacements, and the meaning of other valuables would change as well, such as $M(q)$ would be the inertial tensor matrix and belongs to $\mathbb{R}^n\times\mathbb{R}^n$, where $\tau$ and $\Delta$ would be driving torque and disturbance torque respectively.
 High gain AF is an enhanced control method suitable for single input single output system, and it has been verified in many mechatronic systems \cite{Studenny1984,Xu2000,Han2000}. Here, we consider any freedom in (\ref{e1})
 \begin{equation}
-    J_{ii}\ddot{q}_i+\tau_{ui}=\tau_i \label{e2}
+    J_{ii}\ddot{q}_i = \tau_i + \tau_{ui}
+    \label{e2}
 \end{equation}
 where $J_{ii}$ is an inertial coefficient which could be mass or moment of inertia, and
 \begin{equation}
-    \tau_{ui}=\sum_{j=1}^{n}C_{ij}(q,\dot{q})\dot{q}_j+G_{ii}(q)+F_{ii}(q,\dot{q})-\Delta_i \label{e3}
+    \tau_{ui}=\Delta_i - \sum_{j=1}^{n}C_{ij}(q,\dot{q})\dot{q}_j - G_{ii}(q) - F_{ii}(q,\dot{q}) 
+    \label{e3}
 \end{equation}
 consists of various coupling force (torque) and external disturbance force (torque), which is also called uncertainty.
 
@@ -133,11 +136,13 @@ The key point of high gain AF is turning (\ref{e2}) from force (torque) driving 
 where $k_a$ is a positive constant and called the gain of acceleration feedback.
 Combining (\ref{e2}) and (\ref{e4}), we can obtain
 \begin{equation}
-    \ddot{q}_i=\frac{k_a}{J_{ii}+k_a} v-\frac{1}{J_{ii}+k_a}\tau_{ui} \label{e5}
+    \ddot{q}_i=\frac{k_a}{J_{ii}+k_a} v + \frac{1}{J_{ii}+k_a}\tau_{ui} 
+    \label{e5}
 \end{equation}
 if $k_a$ is chosen big enough, that is $k_a\gg 1$, $k_a\gg J_{ii}$, then
 \begin{equation}
-    \ddot{q}_i\approx v \label{e6}
+    \ddot{q}_i\approx v 
+    \label{e6}
 \end{equation}
 Thus, we obtain a new acceleration tracking controller which can track the reference input.
 Moreover, the uncertainty $\tau_{ui}$ is suppressed in a large extent.
@@ -146,7 +151,8 @@ But it may exist two problems when applied it on practical system.
 The first problem is algebraic loop.
 Substitute (\ref{e4}) into (\ref{e2}), then
 \begin{equation}
-    J_{ii}\ddot{q}_i+\tau_{ui}=k_a(v-\ddot{q}_i) \label{e7}
+    J_{ii}\ddot{q}_i=k_a(v-\ddot{q}_i) + \tau_{ui}
+    \label{e7}
 \end{equation}
 where exists two acceleration parts.
 To present more clearly, Fig. \ref{f1} gives an illustration of (\ref{e7}), where the thick lines represent acceleration feedback loop.
@@ -170,7 +176,7 @@ Although some work improves this shortcoming such as \cite{Han2000}, it increase
 In order to overcome the problems mentioned above, a modified AF method with a pre-filter is proposed.
 Combining (\ref{e2}) and (\ref{e4}), then
 \begin{equation}
-    \tau_{i} = \frac{k_a}{1+ k_a / J_{ii}} + \frac{k_a}{J_{ii}+k_a} \tau_{ui}
+    \tau_{i} = \frac{k_a}{1+ k_a / J_{ii}} - \frac{k_a}{J_{ii}+k_a} \tau_{ui}
     \label{e8}
 \end{equation}
 A new sketch of (\ref{e8}) is illustrated in Fig. \ref{f2}, and it is equivalent to Fig. \ref{f1}
@@ -178,7 +184,7 @@ Thus, we can conclude that the essence of high gain AF is that disturbance rejec
 The measured acceleration can be utilized to calculate the disturbance information, but it also contains control input $\tau_i$.
 It will appear that the input of current moment is determined by current measurement, which directly causes algebraic loop.
 Thus, the key to eliminate algebraic loop is avoiding the static process from acceleration measurement to control input.
-\begin{figure}[h]
+\begin{figure}[t]
     \centering
     \includegraphics[width=2.95in]{illustrations/fig2.pdf}
     \caption{A new sketch of high gain AF}
@@ -187,12 +193,12 @@ Thus, the key to eliminate algebraic loop is avoiding the static process from ac
 
 Based on the analysis above, we utilize acceleration information to obtain disturbance rather than adding an acceleration close loop directly, then to avoid algebraic loop, a dynamic process, also called pre-filter, is added into controller which turns (\ref{e8}) into
 \begin{equation}
-    \tau_i=\frac{k_a}{1+k_a / J_{ii}}v+\frac{k_a}{J_{ii}+k_a}\frac{B(s)}{A(s)}\tau_{ui}
+    \tau_i=\frac{k_a}{1+k_a / J_{ii}}v - \frac{k_a}{J_{ii}+k_a}\frac{B(s)}{A(s)}\tau_{ui}
     \label{e9}
 \end{equation}
 Substitute (\ref{e9}) into (\ref{e2}), then any freedom of the system can be described as
 \begin{equation}
-    J_{ii}\ddot{q}_i = \frac{1/k_a}{1/J_{ii}}v + \frac{B(s)-(J_{ii}/k_a+1)A(s)}{(J_{ii}/k_a+1)A(s)}\tau_{ui}
+    J_{ii}\ddot{q}_i = \frac{1/k_a}{1/J_{ii}}v - \frac{B(s)-(J_{ii}/k_a+1)A(s)}{(J_{ii}/k_a+1)A(s)}\tau_{ui}
     \label{e10}
 \end{equation}
 
@@ -201,10 +207,12 @@ The algebraic loop is eliminated by adding a pre-filter, but it increases the di
 Fortunately, the gain of AF $k_a$ in the controller is only in the form of reciprocal in (\ref{e10}), and a bigger $k_a$ results in stronger a disturbance rejection effect.
 Thus, let $k_a\rightarrow\infty$, that is $k_a\gg max(1,J_{ii})$, then (\ref{e9}) and (\ref{e10}) are approximated as
 \begin{equation}
-    \tau_i = J_{ii}v+\frac{B(s)}{A(s)}\tau_{ui} \label{e11}
+    \tau_i = J_{ii}v - \frac{B(s)}{A(s)}\tau_{ui} 
+    \label{e11}
 \end{equation}
 \begin{equation}
-    J_{ii}\ddot{q}_i = J_{ii}v+\frac{B(s)-A(s)}{A(s)}\tau_{ui} \label{e12}
+    J_{ii}\ddot{q}_i = J_{ii}v + \frac{A(s) - B(s)}{A(s)}\tau_{ui} 
+    \label{e12}
 \end{equation}
 \begin{figure}[t]
     \centering
@@ -227,17 +235,18 @@ Thus, the key to suppress disturbance is not the gain $k_a$ anymore but the dyna
 
 Actually, as can be seen in (\ref{e12}), uncertainty $\tau_{ui}$ effects system after filtered by
 \begin{equation}
-    Q(s) = -\frac{A(s)-B(s)}{A(s)} \label{e13}
+    Q(s) = \frac{A(s)-B(s)}{A(s)} 
+    \label{e13}
 \end{equation}
 Thus, we can determine a proper $Q(s)$ based on main frequency of uncertainty $\tau_{ui}$.
 Normally, the uncertainty or disturbance of the system is at low frequency level.
 A high pass filter will be ale to suppress the disturbance, for example, if we chose
 \begin{equation}
-    \frac{B(s)}{A(s)} = \frac{a}{s+a}, Q(s) = -\frac{s}{s+a} \label{e14}
+    \frac{B(s)}{A(s)} = \frac{a}{s+a}, Q(s) = \frac{s}{s+a} \label{e14}
 \end{equation}
 then
 \begin{equation}
-    J_{ii}\ddot{q}_i = J_{ii}v - \frac{s}{s+a}\tau_{ui} \label{e15}
+    J_{ii}\ddot{q}_i = J_{ii}v + \frac{s}{s+a}\tau_{ui} \label{e15}
 \end{equation}
 Thus, the disturbance with low frequency in $\tau_{ui}$ would be filtered, and the cut frequency of this high pass filter is determined by $a$.
 
@@ -320,13 +329,13 @@ As described in Section II, $v_f$ and $d_f$ should satisfy
 \end{equation}
 If $A(s)$ and $B(s)$ are chosen as (\ref{e14}), combine it with (\ref{e19}) and (\ref{e20}), the designed AF enhanced term is decided by
 \begin{equation}
-    v_f(t) = (2+a\int dt)(mg\bm{e}_3 + m\ddot{x} - F_d)
+    v_f(t) = a\int (F_d - mg\bm{e}_3 + m\ddot{x})dt 
     \label{e22}
 \end{equation}
 
 The design of AF method on angular motion is as same as the process above, and the AF enhanced term should be
 \begin{equation}
-    v_\tau(t) = (2+b\int dt)(\omega\times J\omega + J\ddot{q} - M_d)
+    v_\tau(t) = b\int (M_d - \omega\times J\omega + J\ddot{q})dt
     \label{e23}
 \end{equation}
 where $b$ is the cut frequency as described in (\ref{e15}), $M_d$ is the designed torque generated by a stable controller, and $\ddot{q}$ is angular acceleration measured by sensor.
@@ -448,8 +457,8 @@ then
 \end{equation}
 Thus, conbining (\ref{e22}), we can obtain
 \begin{equation}
-    v_{Sf}(t)=(2+a\int dt)\left(
-        f(V)(\bm{e}_3+\frac{\ddot{x}}{g}) - f_d 
+    v_{Sf}(t) = a \int dt \left(
+         f_d - f(V)(\bm{e}_3+\frac{\ddot{x}}{g})
         \right)
     \label{e28}
 \end{equation}
